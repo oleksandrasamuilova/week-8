@@ -47,3 +47,23 @@ public class Parcel : DeliveryItem
         Console.WriteLine($"Dimensions: {Dimensions}");
     }
 }
+
+public class CargoContainer<T> where T : DeliveryItem
+{
+    private List<T> _items = new List<T>();
+    public void AddItem(T item)
+    {
+        _items.Add(item);
+        Console.WriteLine($"Added: {item.TrackingNumber}");
+    }
+    public double GetTotalCost()
+    {
+        double totalCost = 0;
+        foreach (var item in _items)
+        {
+            totalCost += item.CalculateCost();
+        }
+        return totalCost;
+    }
+}
+
